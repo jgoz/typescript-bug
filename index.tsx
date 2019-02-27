@@ -4,10 +4,10 @@ const animated: {
   [Tag in keyof JSX.IntrinsicElements]: React.ForwardRefExoticComponent<
     React.ComponentPropsWithRef<Tag>
   >
-} = {};
+} = {} as any;
 
 function makeAnimated<T extends React.ReactType>(
-  comp: T
+  _comp: T
 ): React.ForwardRefExoticComponent<React.ComponentPropsWithRef<T>> {
   return null as any; // not important
 }
@@ -18,14 +18,14 @@ export interface UpgradedProps {
 
 export function test<P>(
   component: React.ComponentType<P> | keyof React.ReactHTML
-): React.ComponentType<P & UpgradedProps> {
+): any {
   // changing to `const Comp: any` un-hangs tsserver
   const Comp =
     typeof component === "string"
       ? animated[component]
       : makeAnimated(component);
 
-  return React.forwardRef<any, P & UpgradeProps>((props, ref) => {
+  return React.forwardRef<any, P & UpgradedProps>((props, ref) => {
     const { show, ...ownProps } = props;
     return show ? <Comp {...ownProps} ref={ref} /> : null;
   });
