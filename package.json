@@ -8,7 +8,7 @@
     "@types/react": "^16.8.3",
     "react": "^16.8.2",
     "tslib": "^1.9.3",
-    "typescript": "next"
+    "typescript": "^3.4.0-dev.20190227"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
